@@ -3,16 +3,12 @@ services:
     name: ereto-namunyak
     runtime: node
     region: frankfurt
-    plan: 0.5c-512mb
+    plan: free
     buildCommand: npm ci
     startCommand: npm start
     healthCheckPath: /
     autoDeployTrigger: commit
     initialDeployHook: npm run seed:admin
-    disk:
-      name: uploaded-media
-      mountPath: /opt/render/project/src/public/uploads
-      sizeGB: 1
     envVars:
       - key: NODE_ENV
         value: production
@@ -33,5 +29,5 @@ databases:
   - name: ereto-db
     databaseName: ereto
     user: ereto
-    plan: 0.1c-256mb
+    plan: free
     region: frankfurt
