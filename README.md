@@ -235,12 +235,13 @@ The test verifies:
 
 ### Option C: Render (free demo)
 
-This repository includes a `render.yaml` Blueprint for a no-cost demo using Render's free Express web service and free PostgreSQL database. Admin sessions are stored in PostgreSQL. This is not suitable for production: the web service sleeps after 15 minutes without traffic, uploaded files are lost when its ephemeral filesystem resets, and the free PostgreSQL database expires after 30 days. Free Render services also cannot use persistent disks, and outbound SMTP on ports 25, 465, and 587 is blocked.
+This repository includes a `render.yaml` Blueprint for Render's free Express web service with an external Supabase PostgreSQL database. Admin sessions are stored in PostgreSQL. Supabase Free includes 500 MB of database space and may pause projects after a week of inactivity. Render's free web service sleeps after 15 minutes without traffic, and uploaded files are lost when its ephemeral filesystem resets. Free Render services cannot use persistent disks, and outbound SMTP on ports 25, 465, and 587 is blocked.
 
 1. Push this project to a Git provider repository. `.env`, local cookies, and the SQLite database are excluded by `.gitignore`; never commit secrets.
-2. In Render, create a Blueprint from that repository and confirm both resources use the Free plan.
-3. Enter `APP_URL` (the deployed `https://...onrender.com` URL), `SESSION_SECRET` (at least 32 random characters), `INITIAL_ADMIN_EMAIL`, and a unique `INITIAL_ADMIN_PASSWORD` when prompted. These values are required before the initial admin-seeding hook runs.
-4. After the first successful deploy, open `/admin/login` and verify the demo. Avoid uploading anything you cannot afford to lose. Upgrade to persistent database and file storage before using the site for real organizational data or donations.
+2. Create a Supabase Free project. Copy its PostgreSQL connection string from the Supabase dashboard; use the session pooler connection string for the Render service.
+3. In Render, create a Blueprint from this repository. Set `DATABASE_URL` to the Supabase connection string, `SESSION_SECRET` to at least 32 random characters, and provide `INITIAL_ADMIN_EMAIL` and a unique `INITIAL_ADMIN_PASSWORD`. These are required before the app and initial admin-seeding hook can run.
+4. After Render assigns the service URL, set `APP_URL` to that exact `https://...onrender.com` URL, then open `/admin/login` and verify the demo.
+5. Avoid uploading anything you cannot afford to lose. Use Supabase Storage or another persistent object store for uploaded media before relying on admin uploads; the current app writes them to Render's temporary filesystem.
 
 ---
 

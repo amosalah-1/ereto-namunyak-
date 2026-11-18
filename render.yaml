@@ -13,10 +13,6 @@ services:
       - key: NODE_ENV
         value: production
       - key: DATABASE_URL
-        fromDatabase:
-          name: ereto-db
-          property: connectionString
-      - key: APP_URL
         sync: false
       - key: SESSION_SECRET
         sync: false
@@ -24,10 +20,3 @@ services:
         sync: false
       - key: INITIAL_ADMIN_PASSWORD
         sync: false
-
-databases:
-  - name: ereto-db
-    databaseName: ereto
-    user: ereto
-    plan: free
-    region: frankfurt
