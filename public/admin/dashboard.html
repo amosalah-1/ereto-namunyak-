@@ -1,0 +1,1041 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Dashboard | Ereto Namunyak CBO</title>
+  <link rel="icon" type="image/jpeg" href="/images/ereto-logo.jpg">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/animations.css">
+  <link rel="stylesheet" href="/css/admin.css">
+</head>
+<body>
+
+  <div class="admin-layout">
+    
+    <!-- SIDEBAR -->
+    <aside class="admin-sidebar">
+      <div class="sidebar-header">
+        <img src="/images/ereto-logo.jpg" alt="Logo" class="sidebar-logo">
+        <span class="sidebar-brand-name">Ereto Namunyak</span>
+      </div>
+
+      <nav class="sidebar-nav">
+        <div class="nav-section-title">Main</div>
+        <a href="#" class="sidebar-link active" data-tab="tab-overview">
+          <i class="fas fa-chart-pie"></i> <span>Overview & Stats</span>
+        </a>
+
+        <div class="nav-section-title">Content Management</div>
+        <a href="#" class="sidebar-link" data-tab="tab-projects">
+          <i class="fas fa-project-diagram"></i> <span>Projects</span>
+        </a>
+        <a href="#" class="sidebar-link" data-tab="tab-mission">
+          <i class="fas fa-bullseye"></i> <span>Mission Pillars</span>
+        </a>
+        <a href="#" class="sidebar-link" data-tab="tab-team">
+          <i class="fas fa-users"></i> <span>Team Members</span>
+        </a>
+        <a href="#" class="sidebar-link" data-tab="tab-news">
+          <i class="fas fa-newspaper"></i> <span>News & Articles</span>
+        </a>
+        <a href="#" class="sidebar-link" data-tab="tab-events">
+          <i class="fas fa-calendar-alt"></i> <span>Events</span>
+        </a>
+        <a href="#" class="sidebar-link" data-tab="tab-gallery">
+          <i class="fas fa-images"></i> <span>Photo Gallery</span>
+        </a>
+        <a href="#" class="sidebar-link" data-tab="tab-media">
+          <i class="fas fa-photo-video"></i> <span>Media Library</span>
+        </a>
+
+        <div class="nav-section-title">Finance & Community</div>
+        <a href="#" class="sidebar-link" data-tab="tab-donations">
+          <i class="fas fa-hand-holding-usd"></i> <span>Donations (Pesapal)</span>
+        </a>
+        <a href="#" class="sidebar-link" data-tab="tab-members">
+          <i class="fas fa-id-card"></i> <span>Memberships</span>
+        </a>
+        <a href="#" class="sidebar-link" data-tab="tab-volunteers">
+          <i class="fas fa-hands-helping"></i> <span>Volunteers</span>
+        </a>
+        <a href="#" class="sidebar-link" data-tab="tab-messages">
+          <i class="fas fa-envelope"></i> <span>Messages</span>
+        </a>
+
+        <div class="nav-section-title">System & Security</div>
+        <a href="#" class="sidebar-link" data-tab="tab-settings">
+          <i class="fas fa-cog"></i> <span>Website Settings</span>
+        </a>
+        <a href="#" class="sidebar-link" data-tab="tab-users">
+          <i class="fas fa-user-shield"></i> <span>Users & Roles</span>
+        </a>
+        <a href="#" class="sidebar-link" data-tab="tab-logs">
+          <i class="fas fa-history"></i> <span>Activity Logs</span>
+        </a>
+      </nav>
+
+      <div class="sidebar-footer">
+        <div class="admin-user-info">
+          <span class="admin-user-name" id="logged-admin-name">Admin</span>
+          <span class="admin-user-role" id="logged-admin-role">Administrator</span>
+        </div>
+        <button id="admin-logout-btn" class="btn-logout" title="Sign Out">
+          <i class="fas fa-sign-out-alt"></i>
+        </button>
+      </div>
+    </aside>
+
+    <!-- MAIN CONTENT -->
+    <div class="admin-main">
+      
+      <!-- Topbar -->
+      <header class="admin-topbar">
+        <div class="topbar-left">
+          <button class="sidebar-toggle-btn" id="sidebar-toggle">
+            <i class="fas fa-bars"></i>
+          </button>
+          <h2 class="page-heading-title" id="page-heading-title">Dashboard Overview</h2>
+        </div>
+        <div class="topbar-right">
+          <a href="/" target="_blank" class="website-link-pill">
+            <i class="fas fa-external-link-alt"></i> View Public Website
+          </a>
+        </div>
+      </header>
+
+      <!-- Admin Tab Panes -->
+      <main class="admin-body">
+
+        <!-- =============================================================
+             1. TAB: OVERVIEW & ANALYTICS
+             ============================================================= -->
+        <div id="tab-overview" class="admin-tab-pane active">
+          <!-- Stat Cards -->
+          <div class="stats-cards-grid">
+            <div class="stat-card">
+              <div class="stat-card-info">
+                <h4>Total Funds Raised</h4>
+                <div class="stat-card-number" id="stat-total-donations">KES 0</div>
+              </div>
+              <div class="stat-card-icon green"><i class="fas fa-hand-holding-usd"></i></div>
+            </div>
+
+            <div class="stat-card">
+              <div class="stat-card-info">
+                <h4>Active Projects</h4>
+                <div class="stat-card-number" id="stat-active-projects">0 / 0</div>
+              </div>
+              <div class="stat-card-icon yellow"><i class="fas fa-project-diagram"></i></div>
+            </div>
+
+            <div class="stat-card">
+              <div class="stat-card-info">
+                <h4>Registered Members</h4>
+                <div class="stat-card-number" id="stat-total-members">0</div>
+              </div>
+              <div class="stat-card-icon blue"><i class="fas fa-id-card"></i></div>
+            </div>
+
+            <div class="stat-card">
+              <div class="stat-card-info">
+                <h4>Volunteer Champions</h4>
+                <div class="stat-card-number" id="stat-total-volunteers">0</div>
+              </div>
+              <div class="stat-card-icon purple"><i class="fas fa-hands-helping"></i></div>
+            </div>
+          </div>
+
+          <!-- Overview Tables & Feed -->
+          <div style="display: grid; grid-template-columns: 1.6fr 1fr; gap: 24px;">
+            <div class="admin-card">
+              <div class="admin-card-header">
+                <h3 class="admin-card-title">Recent Donations</h3>
+                <button class="btn btn-outline btn-sm" data-dashboard-tab="tab-donations">View All</button>
+              </div>
+              <div class="admin-table-responsive">
+                <table class="admin-table">
+                  <thead>
+                    <tr>
+                      <th>Donor</th>
+                      <th>Amount</th>
+                      <th>Project</th>
+                      <th>Status</th>
+                      <th>Date</th>
+                    </tr>
+                  </thead>
+                  <tbody id="recent-donations-tbody"></tbody>
+                </table>
+              </div>
+            </div>
+
+            <div class="admin-card">
+              <div class="admin-card-header">
+                <h3 class="admin-card-title">Audit Trail</h3>
+                <button class="btn btn-outline btn-sm" data-dashboard-tab="tab-logs">View All</button>
+              </div>
+              <div id="recent-activity-feed"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- =============================================================
+             2. TAB: PROJECT MANAGEMENT
+             ============================================================= -->
+        <div id="tab-projects" class="admin-tab-pane">
+          <div class="admin-card">
+            <div class="admin-card-header">
+              <div>
+                <h3 class="admin-card-title">Projects Management</h3>
+                <p style="color: var(--admin-text-muted); font-size: 0.88rem;">Published projects automatically display on the public website.</p>
+              </div>
+              <button class="btn btn-primary" data-action="add-project">
+                <i class="fas fa-plus"></i> Add New Project
+              </button>
+            </div>
+            <div class="admin-table-responsive">
+              <table class="admin-table">
+                <thead>
+                  <tr>
+                    <th>Image</th>
+                    <th>Title & Location</th>
+                    <th>Category</th>
+                    <th>Funding Progress</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="admin-projects-tbody"></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- =============================================================
+             3. TAB: MISSION PILLARS
+             ============================================================= -->
+        <div id="tab-mission" class="admin-tab-pane">
+          <div class="admin-card">
+            <div class="admin-card-header">
+              <h3 class="admin-card-title">Mission Strategic Pillars</h3>
+              <button class="btn btn-primary" data-action="add-mission">
+                <i class="fas fa-plus"></i> Add Strategic Pillar
+              </button>
+            </div>
+            <div class="admin-table-responsive">
+              <table class="admin-table">
+                <thead>
+                  <tr>
+                    <th>Icon</th>
+                    <th>Pillar Title</th>
+                    <th>Description</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="admin-mission-tbody"></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- =============================================================
+             4. TAB: TEAM MANAGEMENT
+             ============================================================= -->
+        <div id="tab-team" class="admin-tab-pane">
+          <div class="admin-card">
+            <div class="admin-card-header">
+              <h3 class="admin-card-title">Leadership & Team Members</h3>
+              <button class="btn btn-primary" data-action="add-team">
+                <i class="fas fa-plus"></i> Add Team Member
+              </button>
+            </div>
+            <div class="admin-table-responsive">
+              <table class="admin-table">
+                <thead>
+                  <tr>
+                    <th>Photo</th>
+                    <th>Name</th>
+                    <th>Role</th>
+                    <th>Department</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="admin-team-tbody"></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- =============================================================
+             5. TAB: NEWS & ARTICLES
+             ============================================================= -->
+        <div id="tab-news" class="admin-tab-pane">
+          <div class="admin-card">
+            <div class="admin-card-header">
+              <h3 class="admin-card-title">News & Field Articles</h3>
+              <button class="btn btn-primary" data-action="add-news">
+                <i class="fas fa-plus"></i> Publish Article
+              </button>
+            </div>
+            <div class="admin-table-responsive">
+              <table class="admin-table">
+                <thead>
+                  <tr>
+                    <th>Cover</th>
+                    <th>Article Title</th>
+                    <th>Author</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="admin-news-tbody"></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- =============================================================
+             6. TAB: EVENTS MANAGEMENT
+             ============================================================= -->
+        <div id="tab-events" class="admin-tab-pane">
+          <div class="admin-card">
+            <div class="admin-card-header">
+              <h3 class="admin-card-title">Community Events</h3>
+              <button class="btn btn-primary" data-action="add-event">
+                <i class="fas fa-plus"></i> Schedule Event
+              </button>
+            </div>
+            <div class="admin-table-responsive">
+              <table class="admin-table">
+                <thead>
+                  <tr>
+                    <th>Event Title</th>
+                    <th>Date & Time</th>
+                    <th>Location</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="admin-events-tbody"></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- =============================================================
+             7. TAB: PHOTO GALLERY
+             ============================================================= -->
+        <div id="tab-gallery" class="admin-tab-pane">
+          <div class="admin-card">
+            <div class="admin-card-header">
+              <h3 class="admin-card-title">Photo Gallery</h3>
+              <button class="btn btn-primary" data-action="add-gallery">
+                <i class="fas fa-upload"></i> Upload Photo
+              </button>
+            </div>
+            <div class="admin-table-responsive">
+              <table class="admin-table">
+                <thead>
+                  <tr>
+                    <th>Photo</th>
+                    <th>Title / Caption</th>
+                    <th>Category</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="admin-gallery-tbody"></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- =============================================================
+             8. TAB: DONATIONS & PESAPAL
+             ============================================================= -->
+        <div id="tab-donations" class="admin-tab-pane">
+          <div class="admin-card">
+            <div class="admin-card-header">
+              <div>
+                <h3 class="admin-card-title">Donation Records & Pesapal Transactions</h3>
+                <p style="color: var(--admin-text-muted); font-size: 0.88rem;">Track contributions, confirm settlements, and re-query the Pesapal API.</p>
+              </div>
+              <button class="btn btn-outline" data-action="refresh-donations">
+                <i class="fas fa-sync-alt"></i> Refresh Data
+              </button>
+            </div>
+            <div class="admin-table-responsive">
+              <table class="admin-table">
+                <thead>
+                  <tr>
+                    <th>Donor Name</th>
+                    <th>Contact</th>
+                    <th>Amount</th>
+                    <th>Project</th>
+                    <th>Status</th>
+                    <th>Reference</th>
+                    <th>Audit Action</th>
+                  </tr>
+                </thead>
+                <tbody id="admin-donations-tbody"></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- =============================================================
+             9. TAB: MEMBERSHIP MANAGEMENT
+             ============================================================= -->
+        <div id="tab-members" class="admin-tab-pane">
+          <div class="admin-card">
+            <div class="admin-card-header">
+              <h3 class="admin-card-title">Membership Registry</h3>
+              <button class="btn btn-outline" data-action="refresh-members"><i class="fas fa-sync-alt"></i> Refresh</button>
+            </div>
+            <div class="admin-table-responsive">
+              <table class="admin-table">
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Contact</th>
+                    <th>County</th>
+                    <th>Type</th>
+                    <th>Status</th>
+                    <th>Review Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="admin-members-tbody"></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- =============================================================
+             10. TAB: VOLUNTEER APPLICATIONS
+             ============================================================= -->
+        <div id="tab-volunteers" class="admin-tab-pane">
+          <div class="admin-card">
+            <div class="admin-card-header">
+              <h3 class="admin-card-title">Volunteer Champions Applications</h3>
+              <button class="btn btn-outline" data-action="refresh-volunteers"><i class="fas fa-sync-alt"></i> Refresh</button>
+            </div>
+            <div class="admin-table-responsive">
+              <table class="admin-table">
+                <thead>
+                  <tr>
+                    <th>Applicant Name</th>
+                    <th>Contact</th>
+                    <th>Area of Interest</th>
+                    <th>Skills</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="admin-volunteers-tbody"></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- =============================================================
+             11. TAB: CONTACT MESSAGES
+             ============================================================= -->
+        <div id="tab-messages" class="admin-tab-pane">
+          <div class="admin-card">
+            <div class="admin-card-header">
+              <h3 class="admin-card-title">Inquiries & Contact Messages</h3>
+              <button class="btn btn-outline" data-action="refresh-messages"><i class="fas fa-sync-alt"></i> Refresh</button>
+            </div>
+            <div class="admin-table-responsive">
+              <table class="admin-table">
+                <thead>
+                  <tr>
+                    <th>Sender</th>
+                    <th>Email & Phone</th>
+                    <th>Subject</th>
+                    <th>Message</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="admin-messages-tbody"></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- =============================================================
+             12. TAB: WEBSITE SETTINGS
+             ============================================================= -->
+        <div id="tab-settings" class="admin-tab-pane">
+          <div class="admin-card" style="max-width: 850px;">
+            <div class="admin-card-header">
+              <h3 class="admin-card-title">Global Website Settings</h3>
+              <p style="color: var(--admin-text-muted); font-size: 0.88rem;">Update organization details, hero headlines, and public contact information.</p>
+            </div>
+            <form id="settings-form">
+              <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                <div class="form-group">
+                  <label class="form-label">Organization Name</label>
+                  <input type="text" id="setting-site-name" class="form-control" required>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Motto / Tagline</label>
+                  <input type="text" id="setting-tagline" class="form-control" required>
+                </div>
+              </div>
+
+              <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                <div class="form-group">
+                  <label class="form-label">Official Email</label>
+                  <input type="email" id="setting-email" class="form-control" required>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Official Phone / WhatsApp</label>
+                  <input type="text" id="setting-phone" class="form-control" required>
+                </div>
+              </div>
+
+              <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                <div class="form-group">
+                  <label class="form-label">Physical Address</label>
+                  <input type="text" id="setting-address" class="form-control" required>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Registration Number</label>
+                  <input type="text" id="setting-reg-num" class="form-control" required>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label">Homepage Hero Headline</label>
+                <input type="text" id="setting-hero-title" class="form-control" required>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label">Homepage Hero Subtitle</label>
+                <textarea id="setting-hero-desc" class="form-control" rows="3" required></textarea>
+              </div>
+
+              <h4 style="margin: 25px 0 15px; color: var(--admin-primary); border-top: 1px solid var(--admin-border); padding-top: 15px;">
+                Homepage Animated Statistics
+              </h4>
+
+              <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px;">
+                <div class="form-group">
+                  <label class="form-label">Trees Planted</label>
+                  <input type="text" id="setting-stat-trees" class="form-control" placeholder="35,000+">
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Students Sponsoring</label>
+                  <input type="text" id="setting-stat-students" class="form-control" placeholder="480+">
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Women Empowered</label>
+                  <input type="text" id="setting-stat-women" class="form-control" placeholder="350+">
+                </div>
+                <div class="form-group">
+                  <label class="form-label">PWSN Assisted</label>
+                  <input type="text" id="setting-stat-pwsn" class="form-control" placeholder="180+">
+                </div>
+              </div>
+
+              <button type="submit" class="btn btn-primary btn-lg" style="margin-top: 15px;">
+                <i class="fas fa-save"></i> Save Website Settings
+              </button>
+            </form>
+          </div>
+        </div>
+
+        <!-- =============================================================
+             13. TAB: USER & ROLE MANAGEMENT (Super Admin Only)
+             ============================================================= -->
+        <div id="tab-users" class="admin-tab-pane">
+          <div class="admin-card">
+            <div class="admin-card-header">
+              <div>
+                <h3 class="admin-card-title">User & Role Management</h3>
+                <p style="color: var(--admin-text-muted); font-size: 0.88rem;">Grant role-based administrator accounts (Super Admin, Content Admin, Finance Admin, Editor).</p>
+              </div>
+              <button class="btn btn-primary" data-action="add-user">
+                <i class="fas fa-user-plus"></i> Add Administrator
+              </button>
+            </div>
+            <div class="admin-table-responsive">
+              <table class="admin-table">
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Email Address</th>
+                    <th>Role Assigned</th>
+                    <th>Status</th>
+                    <th>Last Active</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody id="admin-users-tbody"></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- =============================================================
+             14. TAB: ACTIVITY LOGS
+             ============================================================= -->
+        <div id="tab-logs" class="admin-tab-pane">
+          <div class="admin-card">
+            <div class="admin-card-header">
+              <h3 class="admin-card-title">Audit Trail & Activity Logs</h3>
+              <button class="btn btn-outline" data-action="refresh-logs"><i class="fas fa-sync-alt"></i> Refresh</button>
+            </div>
+            <div class="admin-table-responsive">
+              <table class="admin-table">
+                <thead>
+                  <tr>
+                    <th>Timestamp</th>
+                    <th>User</th>
+                    <th>Action</th>
+                    <th>Details</th>
+                    <th>IP Address</th>
+                  </tr>
+                </thead>
+                <tbody id="admin-logs-tbody"></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- =============================================================
+             15. TAB: MEDIA LIBRARY
+             ============================================================= -->
+        <div id="tab-media" class="admin-tab-pane">
+          <div class="admin-card">
+            <div class="admin-card-header">
+              <div>
+                <h3 class="admin-card-title">Media Library</h3>
+                <p style="color: var(--admin-text-muted); font-size: 0.88rem;">Browse and upload image assets for projects, news, and gallery.</p>
+              </div>
+              <div style="display: flex; gap: 10px;">
+                <input type="file" id="media-direct-upload" style="display: none;" accept="image/*">
+                <button class="btn btn-primary" data-action="select-media-file">
+                  <i class="fas fa-cloud-upload-alt"></i> Upload New Image
+                </button>
+              </div>
+            </div>
+            <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 16px;" id="admin-media-grid"></div>
+          </div>
+        </div>
+
+      </main>
+    </div>
+  </div>
+
+  <!-- =========================================================================
+       MODALS FOR ADD/EDIT ACTIONS
+       ========================================================================= -->
+
+  <!-- 1. PROJECT MODAL -->
+  <div id="project-modal" class="admin-modal">
+    <div class="admin-modal-card">
+      <div class="admin-modal-header">
+        <h3 id="project-modal-title">Add New Project</h3>
+        <button class="admin-modal-close" style="background:none; border:none; font-size:1.4rem; cursor:pointer;">&times;</button>
+      </div>
+      <form id="project-form">
+        <div class="admin-modal-body">
+          <input type="hidden" id="project-id-input" name="id">
+
+          <div class="form-group">
+            <label class="form-label">Project Title *</label>
+            <input type="text" id="project-title-input" name="title" class="form-control" required>
+          </div>
+
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+            <div class="form-group">
+              <label class="form-label">Category</label>
+              <select id="project-cat-select" name="category_id" class="form-control">
+                <option value="1">Environmental Conservation</option>
+                <option value="2">Education & Scholarships</option>
+                <option value="3">Women Empowerment</option>
+                <option value="4">Youth Empowerment</option>
+                <option value="5">Special Needs (PWSN)</option>
+                <option value="6">Faith & Community</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Location *</label>
+              <input type="text" id="project-location-input" name="location" class="form-control" placeholder="e.g. Kajiado Central, Kenya" required>
+            </div>
+          </div>
+
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+            <div class="form-group">
+              <label class="form-label">Target Funding (KES)</label>
+              <input type="number" id="project-target-input" name="target_amount" class="form-control" placeholder="1500000">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Raised Amount (KES)</label>
+              <input type="number" id="project-raised-input" name="raised_amount" class="form-control" placeholder="0">
+            </div>
+          </div>
+
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+            <div class="form-group">
+              <label class="form-label">Status</label>
+              <select id="project-status-select" name="status" class="form-control">
+                <option value="published">Published (Visible on site)</option>
+                <option value="draft">Draft (Hidden)</option>
+                <option value="completed">Completed</option>
+                <option value="archived">Archived</option>
+              </select>
+            </div>
+            <div class="form-group" style="display: flex; align-items: center; margin-top: 25px;">
+              <label style="display: flex; align-items: center; gap: 8px; cursor: pointer;">
+                <input type="checkbox" id="project-featured-check" name="featured" value="1">
+                <strong>Feature on Homepage</strong>
+              </label>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Cover Photograph (Upload or choose file)</label>
+            <input type="file" name="cover_image" class="form-control" accept="image/*">
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Short Summary (Displayed on card) *</label>
+            <textarea id="project-short-desc" name="short_description" class="form-control" rows="2" required></textarea>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Full Narrative & Impact Objectives *</label>
+            <textarea id="project-full-desc" name="full_description" class="form-control" rows="5"></textarea>
+          </div>
+        </div>
+        <div class="admin-modal-footer">
+          <button type="button" class="btn btn-outline admin-modal-close">Cancel</button>
+          <button type="submit" class="btn btn-primary">Save Project</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- 2. TEAM MEMBER MODAL -->
+  <div id="team-modal" class="admin-modal">
+    <div class="admin-modal-card">
+      <div class="admin-modal-header">
+        <h3 id="team-modal-title">Add Team Member</h3>
+        <button class="admin-modal-close" style="background:none; border:none; font-size:1.4rem; cursor:pointer;">&times;</button>
+      </div>
+      <form id="team-form">
+        <div class="admin-modal-body">
+          <input type="hidden" name="id">
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+            <div class="form-group">
+              <label class="form-label">Full Name *</label>
+              <input type="text" name="name" class="form-control" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Title / Role *</label>
+              <input type="text" name="role" class="form-control" placeholder="e.g. Executive Patron" required>
+            </div>
+          </div>
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+            <div class="form-group">
+              <label class="form-label">Department</label>
+              <input type="text" name="department" class="form-control" placeholder="e.g. Environmental Affairs">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Email Address</label>
+              <input type="email" name="email" class="form-control">
+            </div>
+          </div>
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+            <div class="form-group">
+              <label class="form-label">Phone Number</label>
+              <input type="tel" name="phone" class="form-control">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Display Order</label>
+              <input type="number" name="display_order" class="form-control" min="0">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Visibility</label>
+            <select name="is_active" class="form-control">
+              <option value="true">Visible on website</option>
+              <option value="false">Hidden</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Photograph (upload replacement if needed)</label>
+            <input type="file" name="photo" class="form-control" accept="image/*">
+            <small class="form-help">Leave blank to keep the current photograph.</small>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Short Biography</label>
+            <textarea name="bio" class="form-control" rows="3"></textarea>
+          </div>
+        </div>
+        <div class="admin-modal-footer">
+          <button type="button" class="btn btn-outline admin-modal-close">Cancel</button>
+          <button type="submit" class="btn btn-primary" id="team-submit-btn">Save Team Member</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- 3. MISSION MODAL -->
+  <div id="mission-modal" class="admin-modal">
+    <div class="admin-modal-card">
+      <div class="admin-modal-header">
+        <h3 id="mission-modal-title">Add Strategic Mission Pillar</h3>
+        <button class="admin-modal-close" style="background:none; border:none; font-size:1.4rem; cursor:pointer;">&times;</button>
+      </div>
+      <form id="mission-form">
+        <div class="admin-modal-body">
+          <input type="hidden" name="id">
+          <div class="form-group">
+            <label class="form-label">Pillar Title *</label>
+            <input type="text" name="title" class="form-control" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label">FontAwesome Icon Class</label>
+            <input type="text" name="icon" class="form-control" placeholder="fa-seedling" value="fa-heart">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Description *</label>
+            <textarea name="description" class="form-control" rows="4" required></textarea>
+          </div>
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+            <div class="form-group">
+              <label class="form-label">Display Order</label>
+              <input type="number" name="display_order" class="form-control" min="0">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Visibility</label>
+              <select name="is_active" class="form-control">
+                <option value="true">Visible on website</option>
+                <option value="false">Hidden</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Image (upload replacement if needed)</label>
+            <input type="file" name="image" class="form-control" accept="image/*">
+            <small class="form-help">Leave blank to keep the current image.</small>
+          </div>
+        </div>
+        <div class="admin-modal-footer">
+          <button type="button" class="btn btn-outline admin-modal-close">Cancel</button>
+          <button type="submit" class="btn btn-primary" id="mission-submit-btn">Save Pillar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- 4. NEWS MODAL -->
+  <div id="news-modal" class="admin-modal">
+    <div class="admin-modal-card">
+      <div class="admin-modal-header">
+        <h3 id="news-modal-title">Publish News / Field Story</h3>
+        <button class="admin-modal-close" style="background:none; border:none; font-size:1.4rem; cursor:pointer;">&times;</button>
+      </div>
+      <form id="news-form">
+        <div class="admin-modal-body">
+          <input type="hidden" name="id">
+          <div class="form-group">
+            <label class="form-label">Article Title *</label>
+            <input type="text" name="title" class="form-control" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Author</label>
+            <input type="text" name="author" class="form-control">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Cover Image (upload replacement if needed)</label>
+            <input type="file" name="cover_image" class="form-control" accept="image/*">
+            <small class="form-help">Leave blank to keep the current cover image.</small>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Summary / Teaser *</label>
+            <textarea name="summary" class="form-control" rows="2" required></textarea>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Full Article Content *</label>
+            <textarea name="content" class="form-control" rows="6" required></textarea>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Publication Status</label>
+            <select name="is_published" class="form-control">
+              <option value="true">Published</option>
+              <option value="false">Draft</option>
+            </select>
+          </div>
+        </div>
+        <div class="admin-modal-footer">
+          <button type="button" class="btn btn-outline admin-modal-close">Cancel</button>
+          <button type="submit" class="btn btn-primary" id="news-submit-btn">Publish Article</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- 5. EVENT MODAL -->
+  <div id="event-modal" class="admin-modal">
+    <div class="admin-modal-card">
+      <div class="admin-modal-header">
+        <h3 id="event-modal-title">Schedule Community Event</h3>
+        <button class="admin-modal-close" style="background:none; border:none; font-size:1.4rem; cursor:pointer;">&times;</button>
+      </div>
+      <form id="event-form">
+        <div class="admin-modal-body">
+          <input type="hidden" name="id">
+          <div class="form-group">
+            <label class="form-label">Event Title *</label>
+            <input type="text" name="title" class="form-control" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Cover Image (upload replacement if needed)</label>
+            <input type="file" name="cover_image" class="form-control" accept="image/*">
+            <small class="form-help">Leave blank to keep the current cover image.</small>
+          </div>
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+            <div class="form-group">
+              <label class="form-label">Date *</label>
+              <input type="date" name="event_date" class="form-control" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Time</label>
+              <input type="text" name="event_time" class="form-control" placeholder="09:00 AM - 02:00 PM EAT">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Location *</label>
+            <input type="text" name="location" class="form-control" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Event Description *</label>
+            <textarea name="description" class="form-control" rows="3" required></textarea>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Registration Link</label>
+            <input type="url" name="registration_link" class="form-control" placeholder="https://...">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Visibility</label>
+            <select name="is_upcoming" class="form-control">
+              <option value="true">Show as upcoming</option>
+              <option value="false">Hide from upcoming events</option>
+            </select>
+          </div>
+        </div>
+        <div class="admin-modal-footer">
+          <button type="button" class="btn btn-outline admin-modal-close">Cancel</button>
+          <button type="submit" class="btn btn-primary" id="event-submit-btn">Schedule Event</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- 6. GALLERY MODAL -->
+  <div id="gallery-modal" class="admin-modal">
+    <div class="admin-modal-card">
+      <div class="admin-modal-header">
+        <h3 id="gallery-modal-title">Upload Photo to Gallery</h3>
+        <button class="admin-modal-close" style="background:none; border:none; font-size:1.4rem; cursor:pointer;">&times;</button>
+      </div>
+      <form id="gallery-form">
+        <div class="admin-modal-body">
+          <input type="hidden" name="id">
+          <div class="form-group">
+            <label class="form-label">Photo Title / Caption *</label>
+            <input type="text" name="title" class="form-control" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Category</label>
+            <select name="category" class="form-control">
+              <option value="Environment">Environment</option>
+              <option value="Education">Education</option>
+              <option value="Empowerment">Empowerment</option>
+              <option value="Special Needs">Special Needs</option>
+              <option value="Youth">Youth</option>
+              <option value="Church">Church & Community</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Image File (upload replacement if needed)</label>
+            <input type="file" name="image" class="form-control" accept="image/*" required>
+            <small class="form-help">Leave blank to keep the current image when editing.</small>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Description</label>
+            <textarea name="description" class="form-control" rows="3"></textarea>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Homepage Feature</label>
+            <select name="is_featured" class="form-control">
+              <option value="true">Featured</option>
+              <option value="false">Not featured</option>
+            </select>
+          </div>
+        </div>
+        <div class="admin-modal-footer">
+          <button type="button" class="btn btn-outline admin-modal-close">Cancel</button>
+          <button type="submit" class="btn btn-primary" id="gallery-submit-btn">Upload Photo</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- 7. USER MODAL (SUPER ADMIN ONLY) -->
+  <div id="user-modal" class="admin-modal">
+    <div class="admin-modal-card">
+      <div class="admin-modal-header">
+        <h3>Create Administrator Account</h3>
+        <button class="admin-modal-close" style="background:none; border:none; font-size:1.4rem; cursor:pointer;">&times;</button>
+      </div>
+      <form id="user-form">
+        <div class="admin-modal-body">
+          <div class="form-group">
+            <label class="form-label">Full Name *</label>
+            <input type="text" name="name" class="form-control" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Email Address *</label>
+            <input type="email" name="email" class="form-control" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Initial Password (min 8 characters) *</label>
+            <input type="password" name="password" class="form-control" required minlength="8">
+          </div>
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+            <div class="form-group">
+              <label class="form-label">Assigned Role *</label>
+              <select name="role" class="form-control" required>
+                <option value="content_admin">Content Administrator</option>
+                <option value="finance_admin">Finance Administrator</option>
+                <option value="editor">Editor</option>
+                <option value="super_admin">Super Administrator</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Phone Number</label>
+              <input type="tel" name="phone" class="form-control">
+            </div>
+          </div>
+        </div>
+        <div class="admin-modal-footer">
+          <button type="button" class="btn btn-outline admin-modal-close">Cancel</button>
+          <button type="submit" class="btn btn-primary">Create Admin Account</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Global Toast Notification Container -->
+  <div class="toast-container"></div>
+
+  <!-- Scripts -->
+  <script src="/js/main.js"></script>
+  <script src="/js/admin-dashboard.js"></script>
+</body>
+</html>

@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Project Details | Ereto Namunyak CBO</title>
+  <meta name="description" content="Detailed overview, community impact, and direct support for Ereto Namunyak CBO projects.">
+  <link rel="icon" type="image/jpeg" href="/images/ereto-logo.jpg">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/animations.css">
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="site-header">
+    <div class="container nav-wrapper">
+      <a href="/" class="brand-logo">
+        <img src="/images/ereto-logo.jpg" alt="Logo">
+        <div class="brand-text">
+          <span class="brand-title">ERETO NAMUNYAK</span>
+          <span class="brand-subtitle">Community-Based Org</span>
+        </div>
+      </a>
+      <nav class="nav-menu">
+        <a href="/" class="nav-link">Home</a>
+        <a href="/mission.html" class="nav-link">Mission</a>
+        <a href="/projects.html" class="nav-link active">Projects</a>
+        <a href="/team.html" class="nav-link">Our Team</a>
+        <a href="/join.html" class="nav-link">Join Now</a>
+        <a href="/gallery.html" class="nav-link">Gallery</a>
+        <a href="/news.html" class="nav-link">News & Events</a>
+        <a href="/contact.html" class="nav-link">Contact</a>
+      </nav>
+      <div class="nav-cta">
+        <a href="/donate.html" class="btn btn-secondary btn-sm"><i class="fas fa-heart"></i> Donate</a>
+        <button class="mobile-toggle" id="mobile-menu-toggle"><i class="fas fa-bars"></i></button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Drawer -->
+  <div class="mobile-nav-backdrop" id="mobile-nav-backdrop"></div>
+  <aside class="mobile-nav" id="mobile-nav-drawer">
+    <div>
+      <div class="mobile-nav-header">
+        <div class="brand-logo">
+          <img src="/images/ereto-logo.jpg" alt="Logo">
+          <span class="brand-title" style="font-size:1.1rem;">Ereto Namunyak</span>
+        </div>
+        <button id="mobile-nav-close" style="background:none; border:none; font-size:1.5rem; cursor:pointer;"><i class="fas fa-times"></i></button>
+      </div>
+      <div class="mobile-nav-links">
+        <a href="/" class="nav-link">Home</a>
+        <a href="/mission.html" class="nav-link">Mission</a>
+        <a href="/projects.html" class="nav-link active">Projects</a>
+        <a href="/team.html" class="nav-link">Our Team</a>
+        <a href="/join.html" class="nav-link">Join Now</a>
+        <a href="/gallery.html" class="nav-link">Gallery</a>
+        <a href="/news.html" class="nav-link">News & Events</a>
+        <a href="/contact.html" class="nav-link">Contact</a>
+      </div>
+    </div>
+    <div style="padding-top:20px; border-top: 1px solid var(--border-light);">
+      <a href="/donate.html" class="btn btn-secondary" style="width:100%;"><i class="fas fa-heart"></i> Donate Today</a>
+    </div>
+  </aside>
+
+  <!-- Project Loading State & Main Details View -->
+  <main class="section" style="padding-top: 120px;">
+    <div class="container" id="project-detail-container">
+      <div style="text-align: center; padding: 80px;">
+        <i class="fas fa-circle-notch fa-spin fa-3x" style="color: var(--primary);"></i>
+        <h3 style="margin-top: 20px;">Loading project story...</h3>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-bottom" style="border-top:none;">
+        <div>&copy; 2026 Ereto Namunyak CBO. All Rights Reserved.</div>
+        <div><a href="/admin" style="color:var(--secondary); font-weight:600;"><i class="fas fa-lock"></i> Staff Administration</a></div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="/js/main.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', async () => {
+      const container = document.getElementById('project-detail-container');
+      const params = new URLSearchParams(window.location.search);
+      let identifier = params.get('slug') || params.get('id');
+
+      // Check path /projects/:slug
+      if (!identifier) {
+        const pathParts = window.location.pathname.split('/');
+        if (pathParts.length > 2 && pathParts[1] === 'projects') {
+          identifier = pathParts[2];
+        }
+      }
+
+      if (!identifier) {
+        identifier = 'olturoto-indigenous-reforestation'; // Default fallback
+      }
+
+      try {
+        const res = await fetch(`/api/projects/${identifier}`);
+        const data = await res.json();
+
+        if (!data.success || !data.data) {
+          container.innerHTML = `
+            <div style="text-align:center; padding: 60px;">
+              <h2>Project Not Found</h2>
+              <p style="color: var(--text-muted); margin-bottom: 20px;">The requested project could not be located in our database.</p>
+              <a href="/projects.html" class="btn btn-primary">Browse All Projects</a>
+            </div>
+          `;
+          return;
+        }
+
+        const p = data.data;
+        document.title = `${p.title} | Ereto Namunyak CBO`;
+
+        const target = parseFloat(p.target_amount) || 0;
+        const raised = parseFloat(p.raised_amount) || 0;
+        const percent = target > 0 ? Math.min(100, Math.round((raised / target) * 100)) : 0;
+
+        container.innerHTML = `
+          <!-- Breadcrumb -->
+          <div style="margin-bottom: 25px; font-size: 0.9rem; color: var(--text-muted);">
+            <a href="/" style="color: var(--primary);">Home</a> &bull; 
+            <a href="/projects.html" style="color: var(--primary);">Projects</a> &bull; 
+            <span>${p.title}</span>
+          </div>
+
+          <div style="display: grid; grid-template-columns: 1.4fr 1fr; gap: 45px; align-items: start;">
+            <!-- Left: Media & Full Story -->
+            <div>
+              <div style="position: relative; border-radius: var(--radius-xl); overflow: hidden; height: 420px; box-shadow: var(--shadow-xl); margin-bottom: 30px;">
+                <img src="${p.cover_image || '/images/environment-conservation.jpeg'}" alt="${p.title}" style="width: 100%; height: 100%; object-fit: cover;">
+                <span style="position: absolute; top: 20px; left: 20px; background: rgba(23, 107, 69, 0.92); color: #fff; padding: 8px 16px; border-radius: var(--radius-full); font-size: 0.85rem; font-weight: 700;">
+                  ${p.category_name || 'Community Outreach'}
+                </span>
+                <span class="status-pill ${p.status}" style="position: absolute; top: 20px; right: 20px;">
+                  ${p.status}
+                </span>
+              </div>
+
+              <h1 style="font-size: 2.4rem; color: var(--text-dark); margin-bottom: 16px;">${p.title}</h1>
+
+              <div style="display: flex; gap: 24px; color: var(--text-muted); font-size: 0.92rem; margin-bottom: 24px; border-bottom: 1px solid var(--border-light); padding-bottom: 16px;">
+                <span><i class="fas fa-map-marker-alt" style="color: var(--primary);"></i> ${p.location}</span>
+                <span><i class="fas fa-calendar-alt" style="color: var(--primary);"></i> ${p.start_date || 'Ongoing'}</span>
+                <span><i class="fas fa-shield-alt" style="color: var(--primary);"></i> Verified CBO Initiative</span>
+              </div>
+
+              <div style="line-height: 1.8; color: var(--text-body); font-size: 1.05rem; margin-bottom: 40px;">
+                <h3 style="margin-bottom: 12px; color: var(--primary);">Executive Summary</h3>
+                <p style="margin-bottom: 20px; font-weight: 500;">${p.short_description}</p>
+                <h3 style="margin-bottom: 12px; color: var(--primary);">Detailed Community Impact & Objectives</h3>
+                <p style="white-space: pre-line;">${p.full_description}</p>
+              </div>
+
+              <!-- Share Buttons -->
+              <div style="background: #f8faf9; padding: 20px; border-radius: var(--radius-md); display: flex; align-items: center; justify-content: space-between;">
+                <span style="font-weight: 700; color: var(--text-dark);"><i class="fas fa-share-alt"></i> Share this cause:</span>
+                <div class="social-links">
+                  <a href="https://wa.me/?text=${encodeURIComponent(p.title + ' ' + window.location.href)}" target="_blank" class="social-icon" style="background: #25D366;"><i class="fab fa-whatsapp"></i></a>
+                  <a href="https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(window.location.href)}" target="_blank" class="social-icon" style="background: #1877F2;"><i class="fab fa-facebook-f"></i></a>
+                  <a href="https://twitter.com/intent/tweet?text=${encodeURIComponent(p.title)}&url=${encodeURIComponent(window.location.href)}" target="_blank" class="social-icon" style="background: #1DA1F2;"><i class="fab fa-twitter"></i></a>
+                </div>
+              </div>
+            </div>
+
+            <!-- Right: Funding Card & Donation CTA -->
+            <div style="position: sticky; top: 100px;">
+              <div class="donation-card" style="padding: 35px;">
+                <h3 style="margin-bottom: 8px;">Fundraising Progress</h3>
+                <p style="color: var(--text-muted); font-size: 0.88rem; margin-bottom: 24px;">Community Contribution Meter</p>
+
+                <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 10px;">
+                  <div>
+                    <span style="font-size: 0.85rem; color: var(--text-muted);">Raised</span>
+                    <div style="font-size: 1.8rem; font-weight: 800; color: var(--primary);">
+                      KES ${Number(raised).toLocaleString()}
+                    </div>
+                  </div>
+                  <div style="text-align: right;">
+                    <span style="font-size: 0.85rem; color: var(--text-muted);">Target Goal</span>
+                    <div style="font-size: 1.1rem; font-weight: 700; color: var(--text-dark);">
+                      KES ${Number(target).toLocaleString()}
+                    </div>
+                  </div>
+                </div>
+
+                <div class="progress-track" style="height: 12px; margin-bottom: 25px;">
+                  <div class="progress-fill" style="width: ${percent}%;"></div>
+                </div>
+
+                <div style="background: var(--primary-light); border-radius: var(--radius-md); padding: 16px; margin-bottom: 25px; font-size: 0.88rem; color: var(--primary-dark);">
+                  <i class="fas fa-check-circle"></i> <strong>100% of your donation</strong> directly finances procurement and local operations for this project.
+                </div>
+
+                <a href="/donate.html?project=${p.id}" class="btn btn-secondary btn-lg" style="width: 100%; margin-bottom: 15px;">
+                  <i class="fas fa-heart"></i> Donate to this Project
+                </a>
+
+                <a href="/join.html?type=volunteer" class="btn btn-outline" style="width: 100%;">
+                  <i class="fas fa-hands-helping"></i> Volunteer for this Project
+                </a>
+              </div>
+            </div>
+          </div>
+        `;
+      } catch (err) {
+        container.innerHTML = `<p style="color:red; text-align:center;">Failed to load project: ${err.message}</p>`;
+      }
+    });
+  </script>
+</body>
+</html>

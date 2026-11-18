@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Donate Securely via Pesapal | Ereto Namunyak CBO</title>
+  <meta name="description" content="Support sustainable community projects in Kenya. Safe and secure donation checkout powered by Pesapal (M-Pesa, Airtel Money, Visa, Mastercard).">
+  <link rel="icon" type="image/jpeg" href="/images/ereto-logo.jpg">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/animations.css">
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="site-header">
+    <div class="container nav-wrapper">
+      <a href="/" class="brand-logo">
+        <img src="/images/ereto-logo.jpg" alt="Logo">
+        <div class="brand-text">
+          <span class="brand-title">ERETO NAMUNYAK</span>
+          <span class="brand-subtitle">Community-Based Org</span>
+        </div>
+      </a>
+      <nav class="nav-menu">
+        <a href="/" class="nav-link">Home</a>
+        <a href="/mission.html" class="nav-link">Mission</a>
+        <a href="/projects.html" class="nav-link">Projects</a>
+        <a href="/team.html" class="nav-link">Our Team</a>
+        <a href="/join.html" class="nav-link">Join Now</a>
+        <a href="/gallery.html" class="nav-link">Gallery</a>
+        <a href="/news.html" class="nav-link">News & Events</a>
+        <a href="/contact.html" class="nav-link">Contact</a>
+      </nav>
+      <div class="nav-cta">
+        <a href="/donate.html" class="btn btn-secondary btn-sm active"><i class="fas fa-heart"></i> Donate</a>
+        <button class="mobile-toggle" id="mobile-menu-toggle"><i class="fas fa-bars"></i></button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Drawer -->
+  <div class="mobile-nav-backdrop" id="mobile-nav-backdrop"></div>
+  <aside class="mobile-nav" id="mobile-nav-drawer">
+    <div>
+      <div class="mobile-nav-header">
+        <div class="brand-logo">
+          <img src="/images/ereto-logo.jpg" alt="Logo">
+          <span class="brand-title" style="font-size:1.1rem;">Ereto Namunyak</span>
+        </div>
+        <button id="mobile-nav-close" style="background:none; border:none; font-size:1.5rem; cursor:pointer;"><i class="fas fa-times"></i></button>
+      </div>
+      <div class="mobile-nav-links">
+        <a href="/" class="nav-link">Home</a>
+        <a href="/mission.html" class="nav-link">Mission</a>
+        <a href="/projects.html" class="nav-link">Projects</a>
+        <a href="/team.html" class="nav-link">Our Team</a>
+        <a href="/join.html" class="nav-link">Join Now</a>
+        <a href="/gallery.html" class="nav-link">Gallery</a>
+        <a href="/news.html" class="nav-link">News & Events</a>
+        <a href="/contact.html" class="nav-link">Contact</a>
+      </div>
+    </div>
+    <div style="padding-top:20px; border-top: 1px solid var(--border-light);">
+      <a href="/donate.html" class="btn btn-secondary" style="width:100%;"><i class="fas fa-heart"></i> Donate Today</a>
+    </div>
+  </aside>
+
+  <!-- Page Banner -->
+  <section style="background: linear-gradient(135deg, #176B45 0%, #0D3F28 100%); color: #FFFFFF; padding: 130px 0 60px; text-align: center;">
+    <div class="container">
+      <span class="badge badge-secondary" style="margin-bottom: 14px;">Pesapal Secure Giving</span>
+      <h1 style="font-size: 3rem; color: #FFFFFF; margin-bottom: 16px;">Make a Meaningful Contribution</h1>
+      <p style="max-width: 680px; margin: 0 auto; color: #E2E8F0; font-size: 1.1rem;">
+        Empower pastoralist families, provide education scholarships, plant native trees, and restore human dignity.
+      </p>
+    </div>
+  </section>
+
+  <!-- Main Checkout Container -->
+  <section class="section">
+    <div class="container" style="max-width: 900px;">
+      <div class="donation-card">
+        
+        <div style="display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid var(--border-light); padding-bottom: 20px; margin-bottom: 30px; flex-wrap: wrap; gap: 14px;">
+          <div>
+            <h2 style="font-size: 1.6rem; color: var(--primary); margin-bottom: 4px;">Donation Details</h2>
+            <p style="color: var(--text-muted); font-size: 0.88rem;">Accepted via M-Pesa, Airtel Money, Visa & Mastercard</p>
+          </div>
+          <div style="display: flex; align-items: center; gap: 10px; background: #E8F5E9; padding: 8px 16px; border-radius: var(--radius-full); color: var(--primary); font-size: 0.85rem; font-weight: 700;">
+            <i class="fas fa-shield-alt"></i> Pesapal 256-Bit SSL Secured
+          </div>
+        </div>
+
+        <form id="pesapal-donation-form">
+          <!-- Step 1: Select Amount -->
+          <div class="form-group" style="margin-bottom: 30px;">
+            <label class="form-label" style="font-size: 1rem; margin-bottom: 14px;">1. Select Contribution Amount (KES)</label>
+            <div class="amount-selector-grid">
+              <button type="button" class="amount-btn" data-amount="100">KES 100</button>
+              <button type="button" class="amount-btn" data-amount="500">KES 500</button>
+              <button type="button" class="amount-btn active" data-amount="1000">KES 1,000</button>
+              <button type="button" class="amount-btn" data-amount="5000">KES 5,000</button>
+            </div>
+
+            <!-- Custom Amount Field -->
+            <div style="margin-top: 15px;">
+              <label class="form-label" style="font-size: 0.88rem; color: var(--text-muted);">Or enter a custom amount (KES):</label>
+              <div style="position: relative;">
+                <span style="position: absolute; left: 16px; top: 50%; transform: translateY(-50%); font-weight: 700; color: var(--primary);">KES</span>
+                <input type="number" id="custom-amount-input" class="form-control" placeholder="e.g. 2500" min="10" step="10" style="padding-left: 65px; font-weight: 700; font-size: 1.1rem;">
+              </div>
+            </div>
+          </div>
+
+          <!-- Step 2: Choose Designation -->
+          <div class="form-group" style="margin-bottom: 30px;">
+            <label class="form-label" style="font-size: 1rem; margin-bottom: 10px;">2. Direct this donation to a specific initiative (optional)</label>
+            <select id="donation-project-select" class="form-control">
+              <option value="">-- General Community Empowerment Fund --</option>
+              <!-- Loaded dynamically from /api/projects -->
+            </select>
+          </div>
+
+          <!-- Step 3: Donor Information -->
+          <div class="form-group" style="margin-bottom: 30px;">
+            <label class="form-label" style="font-size: 1rem; margin-bottom: 14px;">3. Donor Information (For official receipt and tax record)</label>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 15px;">
+              <div>
+                <label class="form-label">Full Name *</label>
+                <input type="text" id="donor-name" class="form-control" placeholder="e.g. Jane Wanjiku" required>
+              </div>
+              <div>
+                <label class="form-label">Email Address (for receipt) *</label>
+                <input type="email" id="donor-email" class="form-control" placeholder="jane@example.com" required>
+              </div>
+            </div>
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+              <div>
+                <label class="form-label">Phone Number (M-Pesa / Contact) *</label>
+                <input type="tel" id="donor-phone" class="form-control" placeholder="0712345678" required>
+              </div>
+              <div>
+                <label class="form-label">Encouragement Message (optional)</label>
+                <input type="text" id="donor-message" class="form-control" placeholder="A word of encouragement to the team">
+              </div>
+            </div>
+          </div>
+
+          <!-- Summary & Submission -->
+          <div style="background: #F8FAF9; border-radius: var(--radius-lg); padding: 24px; border: 1px solid var(--border-light); margin-bottom: 30px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 14px;">
+            <div>
+              <span style="font-size: 0.85rem; color: var(--text-muted);">Total Contribution Amount:</span>
+              <div id="selected-amount-display" style="font-size: 2.2rem; font-weight: 800; color: var(--primary);">
+                KES 1,000
+              </div>
+            </div>
+            <button type="submit" id="donate-submit-btn" class="btn btn-secondary btn-lg" style="padding: 18px 40px; font-size: 1.15rem;">
+              <i class="fas fa-lock"></i> Proceed to Pesapal Checkout
+            </button>
+          </div>
+
+          <div style="text-align: center; font-size: 0.82rem; color: var(--text-muted);">
+            <i class="fas fa-shield-alt" style="color: var(--primary);"></i> Ereto Namunyak CBO never stores your M-Pesa PIN, card numbers or financial passwords. All transactions execute over encrypted Pesapal TLS rails.
+          </div>
+        </form>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-bottom" style="border-top:none;">
+        <div>&copy; 2026 Ereto Namunyak CBO. All Rights Reserved.</div>
+        <div><a href="/admin" style="color:var(--secondary); font-weight:600;"><i class="fas fa-lock"></i> Staff Administration</a></div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="/js/main.js"></script>
+  <script src="/js/donate.js"></script>
+  <script>
+    // Handle initial amount from URL query string if provided (e.g. donate.html?amount=5000)
+    const p = new URLSearchParams(window.location.search);
+    const amt = p.get('amount');
+    if (amt) {
+      const matchBtn = document.querySelector(`.amount-btn[data-amount="${amt}"]`);
+      if (matchBtn) {
+        matchBtn.click();
+      } else {
+        const customInput = document.getElementById('custom-amount-input');
+        if (customInput) {
+          customInput.value = amt;
+          customInput.dispatchEvent(new Event('input'));
+        }
+      }
+    }
+  </script>
+</body>
+</html>

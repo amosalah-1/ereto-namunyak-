@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Portal Login | Ereto Namunyak CBO</title>
+  <link rel="icon" type="image/jpeg" href="/images/ereto-logo.jpg">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/admin.css">
+  <style>
+    .admin-login-alert {
+      padding: 12px 16px;
+      border-radius: 8px;
+      font-size: 0.88rem;
+      margin-bottom: 20px;
+      display: none;
+      align-items: center;
+      gap: 10px;
+    }
+    .admin-login-alert.error {
+      background: #FDE8E8;
+      color: #9B1C1C;
+      border: 1px solid #F8B4B4;
+    }
+    .admin-login-alert.success {
+      background: #DEF7EC;
+      color: #03543F;
+      border: 1px solid #84E1BC;
+    }
+  </style>
+</head>
+<body class="admin-login-body">
+
+  <div class="login-bg-shapes">
+    <div class="login-shape-1"></div>
+    <div class="login-shape-2"></div>
+  </div>
+
+  <div class="admin-login-card">
+    <div class="admin-login-header">
+      <img src="/images/ereto-logo.jpg" alt="Ereto Namunyak Logo" class="admin-login-logo">
+      <h1 class="admin-login-title">Administration Portal</h1>
+      <p class="admin-login-subtitle">Ereto Namunyak Community-Based Organization</p>
+    </div>
+
+    <!-- Alert Box -->
+    <div id="login-alert" class="admin-login-alert error"></div>
+
+    <!-- STANDARD LOGIN FORM -->
+    <div id="login-section">
+      <form id="admin-login-form">
+        <div class="form-group">
+          <label class="form-label" for="admin-email">Administrator Email</label>
+          <div style="position: relative;">
+            <input type="email" id="admin-email" class="form-control" placeholder="admin@eretonamunyak.org" required style="padding-left: 42px;">
+            <i class="fas fa-envelope" style="position: absolute; left: 14px; top: 50%; transform: translateY(-50%); color: var(--admin-text-muted);"></i>
+          </div>
+        </div>
+
+        <div class="form-group" style="margin-bottom: 14px;">
+          <label class="form-label" for="admin-password">Password</label>
+          <div style="position: relative;">
+            <input type="password" id="admin-password" class="form-control" placeholder="••••••••••••" required style="padding-left: 42px;">
+            <i class="fas fa-lock" style="position: absolute; left: 14px; top: 50%; transform: translateY(-50%); color: var(--admin-text-muted);"></i>
+          </div>
+        </div>
+
+        <div class="login-actions-row">
+          <label style="display: flex; align-items: center; gap: 8px; cursor: pointer;">
+            <input type="checkbox" id="admin-remember">
+            <span>Remember me</span>
+          </label>
+          <a href="#" id="forgot-password-link">Forgot password?</a>
+        </div>
+
+        <button type="submit" id="admin-login-btn" class="btn btn-primary btn-lg" style="width: 100%; border-radius: var(--radius-md);">
+          <i class="fas fa-sign-in-alt"></i> Sign In to Dashboard
+        </button>
+      </form>
+
+      <div style="text-align: center; margin-top: 24px; padding-top: 18px; border-top: 1px solid var(--border-light); font-size: 0.82rem; color: var(--admin-text-muted);">
+        <i class="fas fa-shield-alt" style="color: var(--primary);"></i> Protected Administrative System &bull; Unauthorized access prohibited
+      </div>
+      <div style="text-align: center; margin-top: 10px;">
+        <a href="/" style="font-size: 0.85rem; color: var(--admin-primary); font-weight: 600;">
+          <i class="fas fa-arrow-left"></i> Return to Public Website
+        </a>
+      </div>
+    </div>
+
+    <!-- RESET PASSWORD FORM (VISIBLE WHEN ?reset_token=... is present) -->
+    <div id="reset-password-section" style="display: none;">
+      <h3 style="font-size: 1.3rem; margin-bottom: 12px; color: var(--admin-primary);">Set New Password</h3>
+      <p style="font-size: 0.88rem; color: var(--admin-text-muted); margin-bottom: 20px;">
+        Enter your new administrative password below (minimum 8 characters).
+      </p>
+
+      <div id="reset-alert" class="admin-login-alert error"></div>
+
+      <form id="reset-password-form">
+        <div class="form-group">
+          <label class="form-label">New Password</label>
+          <input type="password" id="new-password" class="form-control" placeholder="Min 8 characters" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Confirm New Password</label>
+          <input type="password" id="confirm-password" class="form-control" placeholder="Repeat password" required>
+        </div>
+        <button type="submit" class="btn btn-primary btn-lg" style="width: 100%; margin-bottom: 12px;">
+          Set New Password
+        </button>
+        <a href="/admin/login" class="btn btn-outline btn-sm" style="width: 100%;">Cancel</a>
+      </form>
+    </div>
+
+  </div>
+
+  <!-- FORGOT PASSWORD MODAL -->
+  <div id="forgot-password-modal" class="admin-modal">
+    <div class="admin-modal-card" style="max-width: 440px;">
+      <div class="admin-modal-header">
+        <h3 style="font-size: 1.2rem;">Reset Administrator Password</h3>
+        <button id="forgot-modal-close" style="background:none; border:none; font-size:1.3rem; cursor:pointer;">&times;</button>
+      </div>
+      <div class="admin-modal-body">
+        <p style="font-size: 0.88rem; color: var(--admin-text-muted); margin-bottom: 18px;">
+          Enter your registered administrator email address. We will dispatch a secure, time-limited reset link.
+        </p>
+        <div id="forgot-modal-alert" style="display:none; padding:10px; background:#DEF7EC; color:#03543F; border-radius:6px; font-size:0.85rem; margin-bottom:15px;"></div>
+        <form id="forgot-password-form">
+          <div class="form-group">
+            <label class="form-label">Email Address</label>
+            <input type="email" id="forgot-email" class="form-control" placeholder="admin@eretonamunyak.org" required>
+          </div>
+          <button type="submit" class="btn btn-primary" style="width: 100%;">Send Reset Link</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <script src="/js/admin-login.js"></script>
+</body>
+</html>

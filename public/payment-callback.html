@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Payment Verification | Ereto Namunyak CBO</title>
+  <meta name="description" content="Verifying transaction status with Pesapal payment gateway.">
+  <link rel="icon" type="image/jpeg" href="/images/ereto-logo.jpg">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/animations.css">
+</head>
+<body style="background-color: var(--bg-light);">
+
+  <!-- Header -->
+  <header class="site-header">
+    <div class="container nav-wrapper">
+      <a href="/" class="brand-logo">
+        <img src="/images/ereto-logo.jpg" alt="Logo">
+        <div class="brand-text">
+          <span class="brand-title">ERETO NAMUNYAK</span>
+          <span class="brand-subtitle">Community-Based Org</span>
+        </div>
+      </a>
+      <nav class="nav-menu">
+        <a href="/" class="nav-link">Home</a>
+        <a href="/projects.html" class="nav-link">Projects</a>
+        <a href="/donate.html" class="nav-link">Donate</a>
+        <a href="/contact.html" class="nav-link">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Main Verification Card -->
+  <main class="section" style="padding-top: 130px; min-height: 80vh; display: flex; align-items: center;">
+    <div class="container" style="max-width: 680px;">
+      <div class="donation-card" id="verification-card" style="text-align: center; padding: 50px 40px;">
+        
+        <!-- Loading State Spinner -->
+        <div id="verifying-state">
+          <div style="width: 80px; height: 80px; border-radius: 50%; background: var(--primary-light); color: var(--primary); display: flex; align-items: center; justify-content: center; font-size: 2.2rem; margin: 0 auto 24px;">
+            <i class="fas fa-circle-notch fa-spin"></i>
+          </div>
+          <h2 style="font-size: 1.8rem; margin-bottom: 12px; color: var(--text-dark);">Verifying Transaction with Pesapal</h2>
+          <p style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 25px;">
+            Please hold on while we query the payment gateway for confirmed settlement status...
+          </p>
+          <div style="font-size: 0.8rem; color: #a0aec0;">
+            Security Check &bull; Server-Side Direct Verification
+          </div>
+        </div>
+
+        <!-- Success Result -->
+        <div id="success-state" style="display: none;">
+          <div style="width: 80px; height: 80px; border-radius: 50%; background: #DEF7EC; color: #03543F; display: flex; align-items: center; justify-content: center; font-size: 2.5rem; margin: 0 auto 20px;">
+            <i class="fas fa-check"></i>
+          </div>
+          <h2 style="font-size: 2rem; color: var(--primary); margin-bottom: 8px;">Aheg! Thank You!</h2>
+          <p style="color: var(--text-body); font-size: 1.05rem; margin-bottom: 25px;">
+            Your donation has been successfully verified and credited. An official tax receipt has been dispatched to your email.
+          </p>
+
+          <!-- Receipt Details Box -->
+          <div style="background: #F8FAF9; border: 1.5px solid var(--border-color); border-radius: var(--radius-lg); padding: 24px; text-align: left; margin-bottom: 30px;">
+            <div style="display: flex; justify-content: space-between; border-bottom: 1px solid var(--border-light); padding-bottom: 10px; margin-bottom: 10px; font-size: 0.92rem;">
+              <span style="color: var(--text-muted);">Receipt Number:</span>
+              <strong id="receipt-number" style="color: var(--primary);">-</strong>
+            </div>
+            <div style="display: flex; justify-content: space-between; border-bottom: 1px solid var(--border-light); padding-bottom: 10px; margin-bottom: 10px; font-size: 0.92rem;">
+              <span style="color: var(--text-muted);">Donor Name:</span>
+              <strong id="receipt-donor-name">-</strong>
+            </div>
+            <div style="display: flex; justify-content: space-between; border-bottom: 1px solid var(--border-light); padding-bottom: 10px; margin-bottom: 10px; font-size: 0.92rem;">
+              <span style="color: var(--text-muted);">Amount Paid:</span>
+              <strong id="receipt-amount" style="font-size: 1.15rem; color: var(--primary);">-</strong>
+            </div>
+            <div style="display: flex; justify-content: space-between; border-bottom: 1px solid var(--border-light); padding-bottom: 10px; margin-bottom: 10px; font-size: 0.92rem;">
+              <span style="color: var(--text-muted);">Project Designated:</span>
+              <span id="receipt-project">-</span>
+            </div>
+            <div style="display: flex; justify-content: space-between; font-size: 0.88rem;">
+              <span style="color: var(--text-muted);">Pesapal Reference:</span>
+              <small id="receipt-ref" style="font-family: monospace;">-</small>
+            </div>
+          </div>
+
+          <div style="display: flex; gap: 14px; justify-content: center;">
+            <button id="print-receipt" class="btn btn-outline">
+              <i class="fas fa-print"></i> Print Receipt
+            </button>
+            <a href="/" class="btn btn-primary">
+              Return to Homepage <i class="fas fa-home"></i>
+            </a>
+          </div>
+        </div>
+
+        <!-- Pending State -->
+        <div id="pending-state" style="display: none;">
+          <div style="width: 80px; height: 80px; border-radius: 50%; background: #FEF08A; color: #713F12; display: flex; align-items: center; justify-content: center; font-size: 2.2rem; margin: 0 auto 20px;">
+            <i class="fas fa-clock"></i>
+          </div>
+          <h2 style="font-size: 1.8rem; margin-bottom: 12px; color: var(--text-dark);">Payment Processing</h2>
+          <p style="color: var(--text-body); font-size: 0.95rem; margin-bottom: 25px;">
+            Your transaction is currently awaiting confirmation from your mobile money provider / bank. Please wait a few moments and click below to check again.
+          </p>
+          <button id="retry-verify-btn" class="btn btn-primary btn-lg" style="margin-bottom: 14px;">
+            <i class="fas fa-sync-alt"></i> Check Status Again
+          </button>
+          <div>
+            <a href="/contact.html" style="font-size: 0.88rem; color: var(--text-muted);">Need assistance? Contact our secretariat</a>
+          </div>
+        </div>
+
+        <!-- Failed State -->
+        <div id="failed-state" style="display: none;">
+          <div style="width: 80px; height: 80px; border-radius: 50%; background: #FDE8E8; color: #9B1C1C; display: flex; align-items: center; justify-content: center; font-size: 2.2rem; margin: 0 auto 20px;">
+            <i class="fas fa-times"></i>
+          </div>
+          <h2 style="font-size: 1.8rem; margin-bottom: 12px; color: var(--danger);">Transaction Not Completed</h2>
+          <p style="color: var(--text-body); font-size: 0.95rem; margin-bottom: 25px;">
+            The transaction was either cancelled or could not be settled by your payment provider. No funds were debited.
+          </p>
+          <a href="/donate.html" class="btn btn-secondary btn-lg">
+            <i class="fas fa-redo"></i> Try Donating Again
+          </a>
+        </div>
+
+      </div>
+    </div>
+  </main>
+
+  <script src="/js/main.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const urlParams = new URLSearchParams(window.location.search);
+      const trackingId = urlParams.get('OrderTrackingId') || urlParams.get('orderTrackingId');
+      const merchantRef = urlParams.get('OrderMerchantReference') || urlParams.get('merchantReference');
+
+      const verifyingState = document.getElementById('verifying-state');
+      const successState = document.getElementById('success-state');
+      const pendingState = document.getElementById('pending-state');
+      const failedState = document.getElementById('failed-state');
+
+      async function verifyPaymentStatus() {
+        if (!trackingId && !merchantRef) {
+          verifyingState.style.display = 'none';
+          failedState.style.display = 'block';
+          return;
+        }
+
+        try {
+          const res = await fetch(`/api/donations/verify-payment?orderTrackingId=${encodeURIComponent(trackingId || '')}&merchantReference=${encodeURIComponent(merchantRef || '')}`);
+          const data = await res.json();
+
+          verifyingState.style.display = 'none';
+
+          if (data.success && data.donation) {
+            const d = data.donation;
+            if (d.payment_status === 'COMPLETED') {
+              document.getElementById('receipt-number').innerText = d.receipt_number || d.pesapal_merchant_reference;
+              document.getElementById('receipt-donor-name').innerText = d.donor_name;
+              document.getElementById('receipt-amount').innerText = `KES ${Number(d.amount).toLocaleString()}`;
+              document.getElementById('receipt-project').innerText = d.project_title || 'General Community Fund';
+              document.getElementById('receipt-ref').innerText = d.pesapal_merchant_reference;
+              successState.style.display = 'block';
+            } else if (d.payment_status === 'FAILED') {
+              failedState.style.display = 'block';
+            } else {
+              pendingState.style.display = 'block';
+            }
+          } else {
+            failedState.style.display = 'block';
+          }
+        } catch (err) {
+          verifyingState.style.display = 'none';
+          pendingState.style.display = 'block';
+        }
+      }
+
+      verifyPaymentStatus();
+
+      const retryBtn = document.getElementById('retry-verify-btn');
+      if (retryBtn) {
+        retryBtn.addEventListener('click', () => {
+          pendingState.style.display = 'none';
+          verifyingState.style.display = 'block';
+          setTimeout(verifyPaymentStatus, 1200);
+        });
+      }
+    });
+  </script>
+</body>
+</html>

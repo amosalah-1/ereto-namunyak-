@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Our Leadership Team | Ereto Namunyak CBO</title>
+  <meta name="description" content="Meet the executive board, community coordinators, and grassroots leaders of Ereto Namunyak CBO.">
+  <link rel="icon" type="image/jpeg" href="/images/ereto-logo.jpg">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/animations.css">
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="site-header">
+    <div class="container nav-wrapper">
+      <a href="/" class="brand-logo">
+        <img src="/images/ereto-logo.jpg" alt="Logo">
+        <div class="brand-text">
+          <span class="brand-title">ERETO NAMUNYAK</span>
+          <span class="brand-subtitle">Community-Based Org</span>
+        </div>
+      </a>
+      <nav class="nav-menu">
+        <a href="/" class="nav-link">Home</a>
+        <a href="/mission.html" class="nav-link">Mission</a>
+        <a href="/projects.html" class="nav-link">Projects</a>
+        <a href="/team.html" class="nav-link active">Our Team</a>
+        <a href="/join.html" class="nav-link">Join Now</a>
+        <a href="/gallery.html" class="nav-link">Gallery</a>
+        <a href="/news.html" class="nav-link">News & Events</a>
+        <a href="/contact.html" class="nav-link">Contact</a>
+      </nav>
+      <div class="nav-cta">
+        <a href="/donate.html" class="btn btn-secondary btn-sm"><i class="fas fa-heart"></i> Donate</a>
+        <button class="mobile-toggle" id="mobile-menu-toggle"><i class="fas fa-bars"></i></button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Drawer -->
+  <div class="mobile-nav-backdrop" id="mobile-nav-backdrop"></div>
+  <aside class="mobile-nav" id="mobile-nav-drawer">
+    <div>
+      <div class="mobile-nav-header">
+        <div class="brand-logo">
+          <img src="/images/ereto-logo.jpg" alt="Logo">
+          <span class="brand-title" style="font-size:1.1rem;">Ereto Namunyak</span>
+        </div>
+        <button id="mobile-nav-close" style="background:none; border:none; font-size:1.5rem; cursor:pointer;"><i class="fas fa-times"></i></button>
+      </div>
+      <div class="mobile-nav-links">
+        <a href="/" class="nav-link">Home</a>
+        <a href="/mission.html" class="nav-link">Mission</a>
+        <a href="/projects.html" class="nav-link">Projects</a>
+        <a href="/team.html" class="nav-link active">Our Team</a>
+        <a href="/join.html" class="nav-link">Join Now</a>
+        <a href="/gallery.html" class="nav-link">Gallery</a>
+        <a href="/news.html" class="nav-link">News & Events</a>
+        <a href="/contact.html" class="nav-link">Contact</a>
+      </div>
+    </div>
+    <div style="padding-top:20px; border-top: 1px solid var(--border-light);">
+      <a href="/donate.html" class="btn btn-secondary" style="width:100%;"><i class="fas fa-heart"></i> Donate Today</a>
+    </div>
+  </aside>
+
+  <!-- Page Banner -->
+  <section style="background: linear-gradient(135deg, #176B45 0%, #0D3F28 100%); color: #FFFFFF; padding: 130px 0 65px; text-align: center;">
+    <div class="container">
+      <span class="badge badge-secondary" style="margin-bottom: 14px;">Dedicated Stewards</span>
+      <h1 style="font-size: 3rem; color: #FFFFFF; margin-bottom: 16px;">Our Leadership Team</h1>
+      <p style="max-width: 680px; margin: 0 auto; color: #E2E8F0; font-size: 1.1rem;">
+        Driven by integrity, deep community roots, and an unwavering passion for transforming lives across pastoralist communities in Kenya.
+      </p>
+    </div>
+  </section>
+
+  <!-- Team Members Grid (Dynamic from Database) -->
+  <section class="section">
+    <div class="container">
+      <div class="team-directory-controls" aria-label="Filter team members">
+        <div class="form-group">
+          <label class="form-label" for="team-search-input">Search our team</label>
+          <input type="search" id="team-search-input" class="form-control" placeholder="Search by name, role, or department">
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="team-department-filter">Department</label>
+          <select id="team-department-filter" class="form-control">
+            <option value="">All departments</option>
+          </select>
+        </div>
+      </div>
+      <p class="team-results-count" id="team-results-count" role="status" aria-live="polite"></p>
+      <div class="team-grid" id="team-members-container">
+        <!-- Rendered dynamically by main.js from /api/team -->
+      </div>
+    </div>
+  </section>
+
+  <!-- Community Champions Callout -->
+  <section class="section section-bg-light">
+    <div class="container" style="text-align: center; max-width: 780px;">
+      <span class="badge badge-primary" style="margin-bottom: 14px;">Grassroots Network</span>
+      <h2 class="section-title">Field Officers, Mentors & Volunteers</h2>
+      <p style="font-size: 1.05rem; color: var(--text-body); margin-bottom: 30px;">
+        Beyond our executive secretariat, Ereto Namunyak is powered by over 300 active volunteer champions, school teachers, environmental ambassadors, and church mentors across Kajiado and Narok chapters.
+      </p>
+      <a href="/join.html?type=volunteer" class="btn btn-secondary btn-lg">
+        <i class="fas fa-hands-helping"></i> Become a Community Champion
+      </a>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-bottom" style="border-top:none;">
+        <div>&copy; 2026 Ereto Namunyak CBO. All Rights Reserved.</div>
+        <div><a href="/admin" style="color:var(--secondary); font-weight:600;"><i class="fas fa-lock"></i> Staff Administration</a></div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="/js/main.js"></script>
+</body>
+</html>
